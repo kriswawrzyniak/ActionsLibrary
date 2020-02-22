@@ -68,7 +68,7 @@ Private Static\
 Dictionary indexed by action string with average times 
 #### Member - _count_map
 Private Static\
-Dictionary indexed by action string with accumulative action additions
+Dictionary indexed by action string with accumulative action additions count
 #### Member - _lock
 Private Static\
 threading.Lock used to control concurrent access
