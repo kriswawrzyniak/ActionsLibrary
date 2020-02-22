@@ -90,7 +90,4 @@ class TestActions(unittest.TestCase) :
 
 
 if __name__ == '__main__':
-    test = Test()
-    test.test()
-    print(Actions.getStats())
     unittest.main()
