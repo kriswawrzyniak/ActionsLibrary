@@ -86,8 +86,6 @@ class TestActions(unittest.TestCase) :
         avg = Actions.getStats()
         self.assertEqual(avg, '')
 
-    # def test_getStats_raceCondition(self) :
-
 
 if __name__ == '__main__':
     unittest.main()
