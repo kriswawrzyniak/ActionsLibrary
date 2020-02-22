@@ -72,6 +72,8 @@ Dictionary indexed by action string with accumulative action additions count.
 #### Member - _lock
 Private Static\
 threading.Lock used to control concurrent access.
+
+##### Note: Python classes do not have access modifier; the '_' denote private members or functions.
 ## Testing Detail
 Python's unittest library was utilized to create unit tests for the Actions library. Test cases for addAction and getStats were used and include validating the input, validating simple addAction, validating complex addAction, validating concurrent addAction using threads, and validating getStats output.
 ## Future Considerations
