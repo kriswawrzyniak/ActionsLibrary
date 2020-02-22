@@ -62,16 +62,16 @@ Public Static\
 Resets the class static members, mainly used for testing purposes. This will clear all of the dictionaries and create a new instance of _lock. 
 #### Member - _actions_map
 Private Static\
-Dictionary indexed by action string with accumulative sum of times
+Dictionary indexed by action string with accumulative sum of times.
 #### Member - _average_map
 Private Static\
-Dictionary indexed by action string with average times 
+Dictionary indexed by action string with average times.
 #### Member - _count_map
 Private Static\
-Dictionary indexed by action string with accumulative action additions count
+Dictionary indexed by action string with accumulative action additions count.
 #### Member - _lock
 Private Static\
-threading.Lock used to control concurrent access
+threading.Lock used to control concurrent access.
 
 ### Author 
 **Kris Wawrzyniak** - *Initial work* - [GitHub](https://github.com/kriswawrzyniak)
