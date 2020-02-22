@@ -20,6 +20,16 @@ To use the library in other files you can import it the class Actions from actio
 ```
 import Actions from actions
 ```
+The following libraries from the python standard library are used in the Actions class:
+- threading 
+- sys
+- json
+
+The following libraries from the python standard library are used in the test file:
+- threading
+- time
+- random
+- unittest
 
 ## Implementation Details
 ### Class - Actions
