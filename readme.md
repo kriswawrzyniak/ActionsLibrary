@@ -4,7 +4,7 @@ This actions class was created to implement thread safe functions to add actions
 
 ## Getting Started 
 
-The project uses Python3.7 and has no external dependancies. A Dockerfile has been included to optionally run the application in a container with python3.7-alpine. It installs any dependacies from requirements.txt should any be added in the future.\
+The project uses Python3.7 and has no external dependancies, all packages are from the python standard library. A Dockerfile has been included to optionally run the application in a container with python3.7-alpine. It installs any dependacies from requirements.txt should any be added in the future.\
 To run the project outside of docker ensure python3.7 is intalled and simply run with the following: 
 ```
 python3 actions_test.py
@@ -72,6 +72,10 @@ Dictionary indexed by action string with accumulative action additions count.
 #### Member - _lock
 Private Static\
 threading.Lock used to control concurrent access.
+## Testing Detail
+Python's unittest library was utilized to create unit tests for the Actions library. Test cases for addAction and getStats were used and include validating the input, validating simple addAction, validating complex addAction, validating concurrent addAction using threads, and validating getStats output.
+## Future Considerations
+The Actions class utilizes static member functions to store the data for each action that added. This will persist across threads spawned from a single process but will not persist across processes. Depending on the use case, a persistant data store may be more useful. Utilizing a relational database and implementing transaction and row locking would be a better implementation for such a use case. Alternatively, if the data needed to be shared across processes a shared memory region could be initialized and utilized by each spawned process. A synchronization method, such as locks, would still be need in this case.
 
 ### Author 
 **Kris Wawrzyniak** - *Initial work* - [GitHub](https://github.com/kriswawrzyniak)
