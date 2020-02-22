@@ -26,7 +26,7 @@ import Actions from actions
 | function        | type            | input                     | output |
 | ------------- |:-------------:    | -----:                    | ----:|
 | addAction     | static            | string: json_string       |int: error code|
-| getAvg        | static            |   None                    |string: json_string|
+| getStats      | static            |   None                    |string: json_string|
 | reset         | static            |   None                    |None|
 
 More information on the class can be found in the help string associated with the class.
@@ -46,7 +46,7 @@ The following are the return values for the function:
 -5 - UnhandledError 
 0 - Success - action was successfully added
 ```
-#### Function - getAvg
+#### Function - getStats
 Public Static\
 Gets the serialized json array of the average times for all the actions, utilizes _lock to control concurrent access.\
 The function return string is in the following format: 
