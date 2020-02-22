@@ -5,81 +5,82 @@ import threading
 import unittest
 
 
-def addActionWorker(action, string) :
+def addActionWorker(action_obj, string) :
     r = random.random()
     time.sleep(r)
-    returnCode = action.addAction(string)
+    returnCode = action_obj.addAction(string)
     # return returnCode
 
-def getStatsWorker(action) :
+def getStatsWorker(action_obj) :
     r = random.random()
     time.sleep(r)
-    returnString = action.getStats() 
+    returnString = action_obj.getStats() 
     # return returnString
 
 class TestActions(unittest.TestCase) :
     def set_up(self) :
-        Actions.reset()
+        self.actions = Actions()
+        # Actions.reset()
 
     #addAction
     def test_addAction_invalidString(self) :
         self.set_up()
         #JSON Decode Error
-        err = Actions.addAction('')
+        err = self.actions.addAction('')
         self.assertEqual(err, -1)
 
-        err = Actions.addAction('{"action":"jump", "time:1}')
+        err = self.actions.addAction('{"action":"jump", "time:1}')
         self.assertEqual(err, -1)
 
-        err = Actions.addAction('{"action":jump, "time":1}')
+        err = self.actions.addAction('{"action":jump, "time":1}')
         self.assertEqual(err, -1)
 
-        err = Actions.addAction('"action":jump, "time":1}')
+        err = self.actions.addAction('"action":jump, "time":1}')
         self.assertEqual(err, -1)
 
         #Attribute Error
-        err = Actions.addAction('{"action":10, "time": "hey"}')
+        err = self.actions.addAction('{"action":10, "time": "hey"}')
         self.assertEqual(err, -2)
 
     def test_addAction_missingInputs(self) :
         self.set_up()
         #Missing input
-        err = Actions.addAction('{"action":"", "time":10}')
+        err = self.actions.addAction('{"action":"", "time":10}')
         self.assertEqual(err, -4)
 
         #Value Error
-        err = Actions.addAction('{"action":"run", "time":""}')
+        err = self.actions.addAction('{"action":"run", "time":""}')
         self.assertEqual(err, -3)
 
     def test_addAction_verifyAdd(self) :
         self.set_up()
-        ret = Actions.addAction('{"action":"jump", "time":100}')
+        ret = self.actions.addAction('{"action":"jump", "time":100}')
         self.assertEqual(ret, 0)
-        ret = Actions.addAction('{"action":"run", "time":75}')
+        ret = self.actions.addAction('{"action":"run", "time":75}')
         self.assertEqual(ret, 0)
-        ret = Actions.addAction('{"action":"jump", "time":200}')
+        ret = self.actions.addAction('{"action":"jump", "time":200}')
         self.assertEqual(ret, 0)
-        avg = Actions.getStats()
+        avg = self.actions.getStats()
         self.assertEqual(avg, '[{"action":"jump","avg":150.0},{"action":"run","avg":75.0}]')
 
     def test_addAction_raceCondition(self) :
         self.set_up()
         for i in range(5):
             string = '{"action":"jump", "time":' + str(100 * i) + '}'
-            t = threading.Thread(target=addActionWorker, args=(Actions, string))
+            t = threading.Thread(target=addActionWorker, args=(self.actions, string))
             t.start()
         main_thread = threading.currentThread()
         for t in threading.enumerate():
             if t is not main_thread:
                 t.join()
-        avg = Actions.getStats()
+        avg = self.actions.getStats()
         self.assertEqual(avg, '[{"action":"jump","avg":200.0}]' )
 
     
     #getStats
     def test_getStats_noData(self) :
         self.set_up()
-        avg = Actions.getStats()
+        avg = self.actions.getStats()
         self.assertEqual(avg, '')
 
 
