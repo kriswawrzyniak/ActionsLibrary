@@ -7,7 +7,6 @@ import math
 import threading
 import unittest
 
-from test import Test
 
 def addActionWorker(action, string) :
     r = random.random()
